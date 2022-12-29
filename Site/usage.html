@@ -83,7 +83,7 @@
             <h3>Utilisation du User Space </h3>
             <p>En effet, Gun possède un autre “espace” pour stocker des données, le User Space. Gun utilise un système
                 d’utilisateur devant s’inscrire et se connecter et possédant un espace pour stocker des données
-                (toujours sous forme de noeud) de manière publique (visible) ou chiffrée (cf Partie sécurité). </p>
+                (toujours sous forme de noeud) de manière publique (visible) ou chiffrée (cf <a href="how.html#securite">Partie sécurité</a>). </p>
             <p> Voici comment fonctionne et comment utiliser ce système.</p>
             <div class="texte">
                 <p>1. Déclaration et instantiation de Gun </p>
@@ -113,7 +113,7 @@
                 </div>
                 <div class="texte">
                     Ici, on vient créer un utilisateur avec la méthode “create” en lui passant en paramètre un nom 	d’utilisateur et un mot de passe. Un couple de clé publique/privé est alors créé et rattaché à l'utilisateur.
-                    Ici, le mot de passe est utilisé (après mixage avec “some salt”) 	pour chiffrer la clé privée de l’utilisateur (cf Partie sécurité)
+                    Ici, le mot de passe est utilisé (après mixage avec “some salt”) 	pour chiffrer la clé privée de l’utilisateur (cf <a href="how.html#securite">Partie sécurité</a>)
                     <br>Une fois l’utilisateur créé, il est possible de s’y connecter :
                 </div>
             </div>
@@ -184,7 +184,7 @@
                 <div class="code">
                     user.get(“info”).grant(stranger);
                 </div>
-                <p>Ici “user” est l’utilisateur qui accorde les droits et "stranger" la clé publique de l'autre utilisateur.</p>
+                <p>Ici “user” est l’utilisateur qui accorde les droits et "stranger" est l'autre utilisateur.</p>
             </div>
 
         </div>
