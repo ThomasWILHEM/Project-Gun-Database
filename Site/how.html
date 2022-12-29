@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="container">
+    <div id="navbar">
+        <img id="logo" src="https://gun.eco/media/gun.svg">
+        <div id="buttons">
+            <a href="index.html">Présentation</a>
+            <a href="how.html">Comment ça marche ?</a>
+            <a href="usage.html">Utilisation</a>
+            <a href="example.html">Exemple</a>
+            <a href="goodbad.html">Pour / Contres</a>
+            <a href="competitors.html">Concurrents</a>
+            <a href="future.html">Futur</a>
+        </div>
+    </div>
+    <div id="display">
+        <div id="title">
+            Comment ça marche ?
+        </div>
+        <h3>Données et utilisateurs</h3>
+        <div class="texte">
+            <p>
+                Gun permet de stocker tout type de données comme des tables SQL, des fichiers, des lives et autres.
+                Seulement, tout le monde peut modifier les données stockées dans le Graphe.
+            </p>
+            <p>
+                C’est pour cela qu’il existe 3 types d’espaces dans Gun :
+            </p>
+            <p style="text-align: center">
+                <img src="https://user-images.githubusercontent.com/67427045/174619682-82807f70-07cc-4bac-8bbe-7394256b2945.png"
+                     style="width: 80%">
+            </p>
+            <p>
+            <ul>
+                <li>
+                    Public Space : représente l’espace où tout le monde peut écrire, modifier et supprimer des données
+                </li>
+                <li>
+                    User Space : représente l’espace où seul l’utilisateur (personne connectée via gun) peut écrire,
+                    modifier ou supprimer des données. Ces données peuvent être publiques ou privées
+                </li>
+                <li>
+                    Frozen Space : représente l’espace où tout le monde peut uniquement ajouter de la donnée
+                </li>
+            </ul>
+            </p>
+
+            <h4>Où sont réellement stockées les données ?</h4>
+            <p>Chaque peer (ici navigateur/personne) initialise une instance de gun. </p>
+            <p>Avec Gun, ce sont les peers qui stockent les données. Certains peers peuvent avoir aucune, une partie ou
+                toutes les données. Ce que les peers stockent
+                est décidé grâce aux données auxquelles le peer est abonné (celles qu’il a utilisées). </p>
+            <p>Gun met aussi en place des “relay peer” utilisé pour relier les peers et en même temps servent à stocker
+                des données (toutes s'ils le peuvent).
+                Ces relais utilisent Node – RAD pour stocker des données sur des disques durs.
+                Ils permettent de stocker plus de données que les navigateurs des peers (5 Mb pour le
+                localStorage); </p>
+            <p>De manière factuelle, les données sont réellement stockées dans le navigateur, et plus précisément dans
+                le localStorage mais aussi via indexedDB. </p>
+
+            <div style="display: flex; flex-direction: row">
+                <img src="images/storage.png" style="width: 100%">
+                <div style="display: flex; flex-direction: column; margin: 0 10px">
+                    <p>Voici un exemple de données contenues dans le localStorage de mon ordinateur à un moment
+                        donné. </p>
+                </div>
+            </div>
+
+            <h4>Comment la modification est-elle notifiée aux autres peers ? </h4>
+
+            <p>Gun utilise les websockets pour cela. Lorsqu’un utilisateur (client) modifie quelque chose dans le
+                graphe,
+                un message est envoyé aux autres clients abonnés à l’élément modifié (et aux relay peers). </p>
+            <p>Lorsqu’un client reçoit un message, il met automatiquement la donnée à jour.</p>
+            <p> De cette facon, tous les clients peuvent mettre à jour leurs graphs, même ceux qui ne sont pas connectés
+                à internet (via CAP) </p>
+
+        </div>
+
+        <h3>Sécurité des données</h3>
+        <div class="texte">
+            <p>Technologies utilisée : SEA (Security, Encryption & Autorisation) -> sécurisation et chiffrement des données. </p>
+            <p>Gun fonctionne sur le principe d’utilisateurs. Pour pouvoir échanger des données avec des gens, il faut que la personne possède un compte avec un nom d’utilisateur et un mot de passe. </p>
+            <p>Lors de la création du compte d’un utilisateur, une paire de clé privé/publique est créée. Lorsque la personne se connecte, son mot de passe est hash avec la méthode PBKDF2 pour service de “proof of work” utilisé pour chiffrer et déchiffrer la clé privée. </p>
+            <p>Cela permet donc de lire et de modifier nos données en utilisant la clé privée en tant que “AES encryption key”. </p>
+            <p>Pour prouver que la personne envoyant des données est bien nous, on peut ajouter notre signature, utilisée pour vérifier notre identité. </p>
+        </div>
+
+        <h3>Peer2Peer</h3>
+        <div class="texte">
+            <p>Technologies utilisée : WebRTC</p>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

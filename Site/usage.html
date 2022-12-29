@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="container">
+    <div id="navbar">
+        <img id="logo" src="https://gun.eco/media/gun.svg">
+        <div id="buttons">
+            <a href="index.html">Présentation</a>
+            <a href="how.html">Comment ça marche ?</a>
+            <a href="usage.html">Utilisation</a>
+            <a href="example.html">Exemple</a>
+            <a href="goodbad.html">Pour / Contres</a>
+            <a href="competitors.html">Concurrents</a>
+            <a href="future.html">Futur</a>
+        </div>
+    </div>
+    <div id="display">
+        <div id="title">
+            Utilisation
+        </div>
+        <div class="texte">
+            <p>Rien de mieux pour expliquer l'utilisation des différents espaces et des utilisateurs
+                Gun</p>
+            <h3>Utilisation du Public Space </h3>
+            <p>Ici, nous allons voir comment récupérer et modifier une donnée enregistrée dans le Public Storage</p>
+            <h4>Voici les étapes : </h4>
+            <div class="texte">
+                <p>1. Déclaration et instantiation de Gun </p>
+                <div class="code">
+                    gun = Gun();
+                </div>
+                <div class="texte">
+                    Cette fonction permet de récupérer une instance de Gun et donc un accès au graphe. Il est possible
+                    de passer l’adresse de peers en paramètre.
+                </div>
+            </div>
+            <div class="texte">
+                <p>2. Récupération d’une donnée d’un graphe </p>
+                <div class="code">
+                    copy = gun.get('test').get('paste');
+                </div>
+                <div class="texte">
+                    Cela permet de récupérer la donnée enregistrée dans le nœud “paste” contenu dans le nœud “test”.
+                    Encore une fois, il peut y avoir différents types de données dans ce nœud.
+                </div>
+            </div>
+            <div class="texte">
+                <p>3. Modification de la valeur du nœud </p>
+                <div class="code">
+                    paste.oninput = () => { copy.put("input”.value) };
+                </div>
+                <div class="texte">
+                    La méthode “put” permet de modifier la valeur de la donnée contenue dans le nœud.
+                </div>
+            </div>
+            <div class="texte">
+                <p>4. Mise en place de listener pour modification en temps réelle </p>
+                <div class="texte">
+                    L’un des avantages de Gun est que l’accès/modification/rafraichissement de la donnée se fait en
+                    temps réel.
+                </div>
+                <div class="code">
+                    copy.on((data) => { paste.value = data });
+                </div>
+                <div class="texte">
+                    Donc grâce à ce listener, si jamais une personne externe à mon réseau modifie la valeur de nœud
+                    pendant que je l’affiche, elle sera automatiquement mise à jour.
+                </div>
+            </div>
+            <p>Voilà donc comment fonctionne Gun avec les données contenues dans le Public Space.
+                Regardons maintenant comment le système d’utilisateur fonctionne. </p>
+
+
+            <h3>Utilisation du User Space </h3>
+            <p>En effet, Gun possède un autre “espace” pour stocker des données, le User Space. Gun utilise un système
+                d’utilisateur devant s’inscrire et se connecter et possédant un espace pour stocker des données
+                (toujours sous forme de noeud) de manière publique (visible) ou chiffrée (cf Partie sécurité). </p>
+            <p> Voici comment fonctionne et comment utiliser ce système.</p>
+            <div class="texte">
+                <p>1. Déclaration et instantiation de Gun </p>
+                <div class="code">
+                    gun = Gun(['http://localhost:8765/gun', 'https://gun-manhattan.herokuapp.com/gun']);
+                </div>
+                <div class="texte">
+                    Cette fonction permet de récupérer une instance de Gun et donc un accès au graphe. Il est possible
+                    de passer l’adresse de peers en paramètre.
+                </div>
+            </div>
+            <div class="texte">
+                <p>2. Instantiation de l’outil utilisé pour les utilisateurs </p>
+                <div class="code">
+                    var user = gun.user();
+                </div>
+                <div class="texte">
+                    Cette variable va permettre de créer un utilisateur et de s’identifier.
+                </div>
+            </div>
+            <div class="texte">
+                <p>3. Mise en place de l’identification et de l’inscription </p>
+                <div class="code">
+                    $('#up').on('click', function(e){</br>
+                    &emsp;&emsp; user.create($('#alias').val(), $('#pass').val());</br>
+                    });
+                </div>
+                <div class="texte">
+                    Ici, on vient créer un utilisateur avec la méthode “create” en lui passant en paramètre un nom 	d’utilisateur et un mot de passe. Un couple de clé publique/privé est alors créé et rattaché à l'utilisateur.
+                    Ici, le mot de passe est utilisé (après mixage avec “some salt”) 	pour chiffrer la clé privée de l’utilisateur (cf Partie sécurité)
+                    <br>Une fois l’utilisateur créé, il est possible de s’y connecter :
+                </div>
+            </div>
+            <div class="texte">
+                <p>4. Connexion de l'utilisateur </p>
+                <div class="code">
+                    $('#sign').on('submit', function(e){</br>
+                    &emsp;&emsp;e.preventDefault();</br>
+                    &emsp;&emsp;user.auth($('#alias').val(), $('#pass').val());</br>
+                    });
+                </div>
+                <div class="texte">
+                    Ici, on utilise la méthode “auth” pour authentifier l’utilisateur en passant le login et le mot de passe.
+                    <br>Attention, les usernames ne sont pas uniques !! L’unicité va se faire via la clé publique de l’utilisateur.
+                </div>
+            </div>
+            <div class="texte">
+                <p>5. Verification de la connection de l’utilisateur   </p>
+                <div class="code">
+                    if(!user.is){ return }
+                </div>
+                <div class="texte">
+                    La méthode “is” permet de vérifier que l’utilisateur est connecté.
+                </div>
+            </div>
+            <div class="texte">
+                <p>6. Récupération d’une valeur de l’utilisateur     </p>
+                <div class="code">
+                    user.get('said');
+                </div>
+                <div class="texte">
+                    Ici, on vient chercher la valeur du nœud “said” appartenant à l’utilisateur.
+                </div>
+            </div>
+            <div class="texte">
+                <p>7. Modification d’une valeur de l’utilisateur     </p>
+                <div class="code">
+                    user.get('said').set($('#say').val())
+                </div>
+                <div class="texte">
+                    On vient ici modifier la valeur du nœud "said". Et cela est uniquement possible car l'utilisateur est connecté et qu'il modifie ses noeuds.
+                </div>
+            </div>
+            <p>Et voila comment utiliser gun avec des utilisateurs. Seulement ici, nous avons vu comment lire et écrire dans la partie de notre utilisateur.</p>
+            <p>  Pour aller chercher des données d’autres utilisateurs, il faut utiliser leur clé publique: </p>
+            <div class="texte">
+                <p>Au lieu d’utiliser :   </p>
+                <div class="code">
+                    user = gun.user();
+                </div>
+                <p>On utilse :</p>
+                <div class="code">
+                    stranger = gun.user(pubKey);
+                </div>
+            </div>
+            <p>Si un utilisateur utilise cela, il aura accès aux informations chiffrés de l’utilisateur. </p>
+
+            <div class="texte">
+                <p>Ensuite, on navigue dans l'utilisateur normalement :</p>
+                <div class="code">
+                    stranger.get(‘alias’);
+                </div>
+                <div class="texte">
+                    Cette fonction permet de récupérer le login de la personne.
+                </div>
+                <p>Attention ! Pour pouvoir lire les données d'un autre utilisateur, il faut que celui-ci vous ai donné les "autorisations" car les données sont de base chiffrée. <br>
+                    Pour donner le droit de lecture à "stranger", il faut utiliser ceci :</p>
+                <div class="code">
+                    user.get(“info”).grant(stranger);
+                </div>
+                <p>Ici “user” est l’utilisateur qui accorde les droits et "stranger" la clé publique de l'autre utilisateur.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

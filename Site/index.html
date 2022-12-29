@@ -1,22 +1,65 @@
 <!doctype html>
 <html lang="fr">
-    <head>
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Document</title>
-    </head>
-    <body>
-    <textarea id="paste" placeholder="paste here!"></textarea>
-    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script><script>
-        gun = Gun(['http://localhost:8765/gun', 'https://gun-manhattan.herokuapp.com/gun']);
-        copy = gun.get('toto').get('paste');
-        paste.oninput = () => { copy.put(paste.value) };
-        copy.on((data) => { paste.value = data });
-    </script>
-    </body>
-</html>
+    <link href="style.css" rel="stylesheet">
 
-<style>
-    html, body, textarea { width: 100%; height: 100%; padding: 0; margin: 0; }
-</style>
+</head>
+<body>
+<div id="container">
+    <div id="navbar">
+        <img id="logo" src="https://gun.eco/media/gun.svg">
+        <div id="buttons">
+            <a href="index.html">Présentation</a>
+            <a href="how.html">Comment ça marche ?</a>
+            <a href="usage.html">Utilisation</a>
+            <a href="example.html">Exemple</a>
+            <a href="goodbad.html">Pour / Contres</a>
+            <a href="competitors.html">Concurrents</a>
+            <a href="future.html">Futur</a>
+        </div>
+    </div>
+    <div id="display">
+        <div id="title">
+            Présentation
+        </div>
+        <div class="texte">
+            <p style="text-align: center">
+                <img id="gunImage" src="images/gun.png">
+            </p>
+            <p>Gun est un écosystème d’outil permettant de synchroniser des données de façon sécurisée et sans utiliser
+                de base de données traditionnelles. La persistance de données se fait via les utilisateurs.</p>
+
+            <div style="display: flex; flex-direction: row">
+                <img src="https://imgs.search.brave.com/DJ4jc8mk5B0io6VdEWGkD_7zuzzEQXl_xQ-iiJU7PLc/rs:fit:753:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5G/bE1UYnVxTTNleXJm/MjZ1Q2hpc3F3SGFF/cSZwaWQ9QXBp">
+                <div style="display: flex; flex-direction: column; margin: 0 10px">
+                    <p> Le graphe de données est distribué parmi tous les pairs utilisant le réseau.
+                        Un pair peut posséder l’entièreté, une partie ou aucune partie du graphe de données.
+                        La base de données entière est en réalité l’union de tous les graphs possédés par les pairs.</p>
+                    <p>Cela vient donc remplacer une architecture "server-based" classique</p>
+                </div>
+            </div>
+
+            <p>Pour accéder à une donnée un pair va “parcourir” le graphe via les autres pairs.</p>
+
+            <h3>Quelle est l'utilité ?</h3>
+            <p>Gun permet de stocker des données de facon décentralisé, sans serveur(s) possédants toutes les
+                donnees. Cela va ainsi permettre de ne pas avoir à payer de serveurs pour y stocker des données ou
+                autre.
+                De plus, l’utilisation de Gun combinée à SEA permet d’avoir une très bonne sécurité pour les
+                données.
+            </p>
+
+            <h3>Gun déjà présent dans différents projets : </h3>
+
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>
