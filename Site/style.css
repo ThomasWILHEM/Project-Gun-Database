@@ -81,7 +81,7 @@ img {
 
 li {
     margin-bottom: 10px;
-    
+
 }
 
 .texte {
@@ -99,4 +99,20 @@ li {
     line-height: 1.5;
     padding: 15px;
     border-radius: 15px;
+}
+
+.exemple {
+    width: 40%;
+    margin: 0 80px;
+}
+
+.exemple2 {
+    width: 100%;
+    margin: 0 80px;
+}
+
+textarea {
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px;
 }

@@ -24,7 +24,143 @@
         </div>
     </div>
     <div id="display">
+        <div id="title">
+            Exemple
+        </div>
+        <p>Cette partie contient un exemple de script utilisé avec Gun.</p>
+        <h3>Exemple Public Space</h3>
+        <p>Voici donc un exemple utilisant Gun et le Public Space.</p>
+        <p>Cette textarea permet de lire et d'enregistrer des données (ici du texte) dans un nœud public en étant
+            relié via un Peer passé en paramètre. Et grâce au fonctionnement en temps réél, si vous ouvrez cette page
+            deux fois et que vous modifiez ce qui est écrit dans la textarea, alors le texte de la seconde page se
+            modifiera en live.</p>
+        <div class="texte" style="display: flex; flex-direction: row">
+            <div class="exemple">
+                <textarea id="paste" placeholder="paste here!"></textarea>
+                <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+                <script>
+                    gun = Gun(['https://gun-manhattan.herokuapp.com/gun']);
+                    copy = gun.get('test').get('paste');
+                    paste.oninput = () => {
+                        copy.put(paste.value)
+                    };
+                    copy.on((data) => {
+                        paste.value = data
+                    });
+                </script>
+            </div>
+            <div class="code" style="width: 40%;">
+                gun = Gun(); <br><br>
+                copy = gun.get('test').get('paste');<br>
+                paste.oninput = () => {<br>
+                &emsp;&emsp;copy.put(paste.value)<br>
+                };<br><br>
+                copy.on((data) => {<br>
+                &emsp;&emsp;paste.value = data<br>
+                });<br>
+            </div>
+        </div>
 
+        <h3 style="margin-top: 100px">Exemple User Space</h3>
+        <p>Voici donc un exemple utilisant Gun et le User Space.</p>
+        <p>On retrouve ici une TODO App permettant de se connecter ou de créer un compte.
+            Une fois le compte créé, il suffit de se connecter en rentrant les informations et en cliquant sur "sign
+            in".<br>
+            Attendez que le formulaire disparaisse. Une fois cela fait, en entrant quelque chose dans la textarea et en
+            cliquant sur "speak", l'élément sera ajouté à, la liste.<br>
+            Comme on utilise ici les utilisateurs, cette liste sera privée. Si vous rafraichissez la page et que vous
+            vous reconnectez, vous devriez retrouver votre TODO list.
+        </p>
+        <p>Essayer avec le login "testing" et le mot de passe "testing123" :</p>
+        <div class="texte">
+            <div class="exemple2">
+                <div style="background-color: white;border-radius: 15px; padding: 10px; width: 50%">
+                    <h1 style="color: black ">Todo</h1>
+
+                    <form id="sign">
+                        <input id="alias" placeholder="username">
+                        <input id="pass" placeholder="passphrase" type="password">
+                        <input id="in" type="submit" value="sign in">
+                        <input id="up" type="button" value="sign up">
+                    </form>
+
+                    <ul></ul>
+
+                    <form id="said">
+                        <input id="say">
+                        <input id="speak" type="submit" value="speak">
+                    </form>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/gun/examples/jquery.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+                <!-- script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script -->
+                <script>
+                    var gun = Gun(['https://gun-manhattan.herokuapp.com/gun']);
+                    var user = gun.user();
+
+                    $('#up').on('click', function (e) {
+                        user.create($('#alias').val(), $('#pass').val());
+                    });
+
+                    $('#sign').on('submit', function (e) {
+                        e.preventDefault();
+                        user.auth($('#alias').val(), $('#pass').val());
+                    });
+
+                    $('#said').on('submit', function (e) {
+                        e.preventDefault();
+                        if (!user.is) {
+                            return
+                        }
+                        user.get('said').set($('#say').val());
+                        $('#say').val("");
+                    });
+
+                    function UI(say, id) {
+                        var li = $('#' + id).get(0) || $('<li>').attr('id', id).css("color", "black").appendTo('ul');
+                        $(li).text(say);
+                    };
+
+                    gun.on('auth', function () {
+                        $('#sign').hide();
+                        user.get('said').map().once(UI);
+                    });
+                </script>
+            </div>
+            <div class="code">
+                var gun = Gun(['https://gun-manhattan.herokuapp.com/gun']);<br>
+                var user = gun.user();<br><br>
+
+                $('#up').on('click', function (e) {<br>
+                &emsp;&emsp;user.create($('#alias').val(), $('#pass').val());<br>
+                });<br><br>
+
+                $('#sign').on('submit', function (e) {<br>
+                &emsp;&emsp;e.preventDefault();<br>
+                &emsp;&emsp;user.auth($('#alias').val(), $('#pass').val());<br>
+                });<br><br>
+
+                $('#said').on('submit', function (e) {<br>
+                &emsp;&emsp;e.preventDefault();<br>
+                &emsp;&emsp;if (!user.is) <br>
+                &emsp;&emsp;&emsp;&emsp;return<br>
+                }<br><br>
+                user.get('said').set($('#say').val());<br>
+                &emsp;&emsp;$('#say').val("");<br>
+                });<br><br>
+
+                function UI(say, id) {<br>
+                &emsp;&emsp;var li = $('#' + id).get(0) || $('li').attr('id', id).appendTo('ul');<br>
+                &emsp;&emsp;&emsp;&emsp;$(li).text(say);<br>
+                };<br><br>
+
+                gun.on('auth', function () {<br>
+                &emsp;&emsp;$('#sign').hide();<br>
+                &emsp;&emsp;user.get('said').map().once(UI);<br>
+                });<br>
+            </div>
+        </div>
     </div>
 </div>
 </body>
