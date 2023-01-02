@@ -27,7 +27,7 @@
         <div id="title">
             Exemples
         </div>
-        <p>Cette partie contient un exemple de script utilisé avec Gun.</p>
+        <p>Cette partie contient deux exemples de scripts utilisés avec Gun.</p>
         <h3>Exemple Public Space</h3>
         <p>Voici donc un exemple utilisant Gun et le Public Space.</p>
         <p>Cette textarea permet de lire et d'enregistrer des données (ici du texte) dans un nœud public en étant
@@ -50,7 +50,7 @@
                 </script>
             </div>
             <div class="code" style="width: 40%;">
-                gun = Gun(); <br><br>
+                gun = Gun(['https://gun-manhattan.herokuapp.com/gun']);<br><br>
                 copy = gun.get('test').get('paste');<br>
                 paste.oninput = () => {<br>
                 &emsp;&emsp;copy.put(paste.value)<br>
@@ -64,10 +64,10 @@
         <h3 style="margin-top: 100px">Exemple User Space</h3>
         <p>Voici donc un exemple utilisant Gun et le User Space.</p>
         <p>On retrouve ici une TODO App permettant de se connecter ou de créer un compte.
-            Une fois le compte créé, il suffit de se connecter en rentrant les informations et en cliquant sur "sign
-            in".<br>
+            Une fois le compte créé, il suffit de se connecter en rentrant les informations et en cliquant sur
+            "Connexion".<br>
             Attendez que le formulaire disparaisse. Une fois cela fait, en entrant quelque chose dans la textarea et en
-            cliquant sur "speak", l'élément sera ajouté à, la liste.<br>
+            cliquant sur "Ajouter", l'élément sera ajouté à la liste.<br>
             Comme on utilise ici les utilisateurs, cette liste sera privée. Si vous rafraichissez la page et que vous
             vous reconnectez, vous devriez retrouver votre TODO list.
             <br>
