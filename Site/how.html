@@ -54,7 +54,7 @@
                 </li>
             </ul>
             </p>
-
+            <hr class="rounded">
             <h4>Où sont réellement stockées les données ?</h4>
             <p>Chaque peer (ici navigateur/personne) initialise une instance de gun. </p>
             <p>Avec Gun, ce sont les peers qui stockent les données. Certains peers peuvent avoir aucune, une partie ou
@@ -75,7 +75,8 @@
                         donné. </p>
                 </div>
             </div>
-
+            <br>
+            <hr class="rounded">
             <h4>Comment la modification est-elle notifiée aux autres peers ? </h4>
 
             <p>Gun utilise les websockets pour cela. Lorsqu’un utilisateur (client) modifie quelque chose dans le
@@ -85,16 +86,20 @@
             <p> De cette facon, tous les clients peuvent mettre à jour leurs graphs, même ceux qui ne sont pas connectés
                 à internet (via CAP). C'est pour cela que l'on parle d'Offline-First. </p>
 
+            <hr class="rounded">
             <h4>Mais comment sont gérés les conflits ?</h4>
             <p>En effet, comme tout le monde peut modifier la donnée, il se peut que deux personnes modifient la même donnée en même temps.</p>
-            <p>Pour palier à ce problème, Gun met en place HAM (Hypothetical Amnesia Machine) qui utilise différents mécanismes en les combinants permettant de savoir comment synchroniser les données. : </p>
+            <p>Pour palier à ce problème, Gun met en place HAM (Hypothetical Amnesia Machine) qui utilise différents mécanismes en les combinants permettant de savoir comment synchroniser les données : </p>
             <ul>
                 <li>
                     <b>Les Timestamps</b><br>
+                    <p style="text-align: center"><img style="width: 40%" src="./images/timestamps.png"></p>
+
                     Il permettent de donner "l'horaire" à laquelle la donnée a été envoyé.
                 </li>
                 <li>
                     <b>Les Vectors Clocks</b><br>
+                    <p style="text-align: center"><img style="width: 40%" src="https://imgs.search.brave.com/VetaNgshEm5JOqeSJuSZecTLsVxE4u0SzZ4g21T3iyI/rs:fit:1200:556:1/g:ce/aHR0cHM6Ly9kaXN0/cmlidXRlZHN5c3Rl/bXNibG9nLmNvbS9h/c3NldHMvaW1hZ2Vz/L3ZlY3Rvcl9jbG9j/ay5wbmc"></p>
                     Permettent de définir l'ordre dans laquelle sont envoyés/modifiées les données.
                 </li>
                 <li>
@@ -102,7 +107,7 @@
                 </li>
             </ul>
         </div>
-
+        <hr class="rounded">
         <h3 id="securite">Sécurité des données</h3>
         <div class="texte">
             <p>Technologies utilisée : SEA (Security, Encryption & Autorisation) -> sécurisation et chiffrement des données. </p>
@@ -111,10 +116,10 @@
             <p>Cela permet donc de lire et de modifier nos données en utilisant la clé privée en tant que “AES encryption key”. </p>
             <p>Pour prouver que la personne envoyant des données est bien nous, on peut ajouter notre signature, utilisée pour vérifier notre identité. </p>
         </div>
-
+        <hr class="rounded">
         <h3>Peer2Peer</h3>
         <div class="texte">
-            <p>Technologies utilisée : WebRTC</p>
+            <p>Technologies utilisées : WebRTC</p>
         </div>
     </div>
 </div>

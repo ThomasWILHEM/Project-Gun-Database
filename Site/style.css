@@ -122,3 +122,8 @@ textarea {
     font-family: 'Carlito';
     src: url('./font/Carlito-Regular.ttf') format('truetype');
 }
+
+hr.rounded {
+    border-top: 5px solid #bbb;
+    border-radius: 5px;
+}
