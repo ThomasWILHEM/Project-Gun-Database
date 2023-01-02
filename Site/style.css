@@ -120,5 +120,5 @@ textarea {
 
 @font-face {
     font-family: 'Carlito';
-    src: url('/font/Carlito-Regular.ttf') format('truetype');
+    src: url('./font/Carlito-Regular.ttf') format('truetype');
 }

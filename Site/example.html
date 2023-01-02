@@ -70,8 +70,10 @@
             cliquant sur "speak", l'élément sera ajouté à, la liste.<br>
             Comme on utilise ici les utilisateurs, cette liste sera privée. Si vous rafraichissez la page et que vous
             vous reconnectez, vous devriez retrouver votre TODO list.
+            <br>
         </p>
-        <p>Essayer avec le login "testing" et le mot de passe "testing123" :</p>
+        <p>Essayez de vous connecter avec le login "testing" et le mot de passe "testing123" .</p>
+
         <div class="texte">
             <div class="exemple2">
                 <div style="background-color: white;border-radius: 15px; padding: 10px; width: 50%">
@@ -80,21 +82,21 @@
                     <form id="sign">
                         <input id="alias" placeholder="username">
                         <input id="pass" placeholder="passphrase" type="password">
-                        <input id="in" type="submit" value="sign in">
-                        <input id="up" type="button" value="sign up">
+                        <input id="in" type="submit" value="Connexion">
+                        <input id="up" type="button" value="Inscription">
                     </form>
 
                     <ul></ul>
 
                     <form id="said">
                         <input id="say">
-                        <input id="speak" type="submit" value="speak">
+                        <input id="speak" type="submit" value="Ajouter">
                     </form>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/gun/examples/jquery.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
-                <!-- script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script -->
+                <script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script>
                 <script>
                     var gun = Gun(['https://gun-manhattan.herokuapp.com/gun']);
                     var user = gun.user();
@@ -106,6 +108,7 @@
                     $('#sign').on('submit', function (e) {
                         e.preventDefault();
                         user.auth($('#alias').val(), $('#pass').val());
+                        console.log(user);
                     });
 
                     $('#said').on('submit', function (e) {
@@ -128,6 +131,10 @@
                     });
                 </script>
             </div>
+            <p>Essayez ensuite de vous enregistrer avec un mot de passe d'au moins <b>8 caractères</b> (en rechargeant
+                la
+                page).</p>
+
             <div class="code">
                 var gun = Gun(['https://gun-manhattan.herokuapp.com/gun']);<br>
                 var user = gun.user();<br><br>
@@ -161,6 +168,8 @@
                 });<br>
             </div>
         </div>
+        <p>Ces exemples sont issus de la documentation de Gun : <a
+                href="https://gun.eco/docs/">https://gun.eco/docs/</a></p>
     </div>
 </div>
 </body>

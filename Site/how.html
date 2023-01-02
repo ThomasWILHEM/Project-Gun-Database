@@ -83,8 +83,24 @@
                 un message est envoyé aux autres clients abonnés à l’élément modifié (et aux relay peers). </p>
             <p>Lorsqu’un client reçoit un message, il met automatiquement la donnée à jour.</p>
             <p> De cette facon, tous les clients peuvent mettre à jour leurs graphs, même ceux qui ne sont pas connectés
-                à internet (via CAP) </p>
+                à internet (via CAP). C'est pour cela que l'on parle d'Offline-First. </p>
 
+            <h4>Mais comment sont gérés les conflits ?</h4>
+            <p>En effet, comme tout le monde peut modifier la donnée, il se peut que deux personnes modifient la même donnée en même temps.</p>
+            <p>Pour palier à ce problème, Gun met en place HAM (Hypothetical Amnesia Machine) qui utilise différents mécanismes en les combinants permettant de savoir comment synchroniser les données. : </p>
+            <ul>
+                <li>
+                    <b>Les Timestamps</b><br>
+                    Il permettent de donner "l'horaire" à laquelle la donnée a été envoyé.
+                </li>
+                <li>
+                    <b>Les Vectors Clocks</b><br>
+                    Permettent de définir l'ordre dans laquelle sont envoyés/modifiées les données.
+                </li>
+                <li>
+                    <b>Un algorithme de résolution de conflit</b>
+                </li>
+            </ul>
         </div>
 
         <h3 id="securite">Sécurité des données</h3>
