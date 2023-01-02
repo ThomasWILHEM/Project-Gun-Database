@@ -34,7 +34,7 @@
             <p>Ici, nous allons voir comment récupérer et modifier une donnée enregistrée dans le Public Storage</p>
             <h4>Voici les étapes : </h4>
             <div class="texte">
-                <p>1. Déclaration et instantiation de Gun </p>
+                <p><b>1. Déclaration et instantiation de Gun </b></p>
                 <div class="code">
                     gun = Gun();
                 </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="texte">
-                <p>2. Récupération d’une donnée d’un graphe </p>
+                <p><b>2. Récupération d’une donnée d’un graphe </b></p>
                 <div class="code">
                     copy = gun.get('test').get('paste');
                 </div>
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="texte">
-                <p>3. Modification de la valeur du nœud </p>
+                <p><b>3. Modification de la valeur du nœud </b></p>
                 <div class="code">
                     paste.oninput = () => { copy.put("input”.value) };
                 </div>
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="texte">
-                <p>4. Mise en place de listener pour modification en temps réelle </p>
+                <p><b>4. Mise en place de listener pour modification en temps réelle </b></p>
                 <div class="texte">
                     L’un des avantages de Gun est que l’accès/modification/rafraichissement de la donnée se fait en
                     temps réel.
@@ -83,10 +83,10 @@
             <h3>Utilisation du User Space </h3>
             <p>En effet, Gun possède un autre “espace” pour stocker des données, le User Space. Gun utilise un système
                 d’utilisateur devant s’inscrire et se connecter et possédant un espace pour stocker des données
-                (toujours sous forme de noeud) de manière publique (visible) ou chiffrée (cf <a href="how.html#securite">Partie sécurité</a>). </p>
-            <p> Voici comment fonctionne et comment utiliser ce système.</p>
+                (toujours sous forme de nœud) de manière publique (visible) ou chiffrée (cf <a href="how.html#securite">Partie sécurité</a>). </p>
+            <p> Voici comment fonctionne et comment utiliser ce système :</p>
             <div class="texte">
-                <p>1. Déclaration et instantiation de Gun </p>
+                <p><b>1. Déclaration et instantiation de Gun </b></p>
                 <div class="code">
                     gun = Gun(['http://localhost:8765/gun', 'https://gun-manhattan.herokuapp.com/gun']);
                 </div>
@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="texte">
-                <p>2. Instantiation de l’outil utilisé pour les utilisateurs </p>
+                <p><b>2. Instantiation de l’outil utilisé pour les utilisateurs </b></p>
                 <div class="code">
                     var user = gun.user();
                 </div>
@@ -105,7 +105,7 @@
                 </div>
             </div>
             <div class="texte">
-                <p>3. Mise en place de l’identification et de l’inscription </p>
+                <p><b>3. Mise en place de l’identification et de l’inscription </b></p>
                 <div class="code">
                     $('#up').on('click', function(e){</br>
                     &emsp;&emsp; user.create($('#alias').val(), $('#pass').val());</br>
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="texte">
-                <p>4. Connexion de l'utilisateur </p>
+                <p><b>4. Connexion de l'utilisateur </b></p>
                 <div class="code">
                     $('#sign').on('submit', function(e){</br>
                     &emsp;&emsp;e.preventDefault();</br>
@@ -131,7 +131,7 @@
                 </div>
             </div>
             <div class="texte">
-                <p>5. Verification de la connection de l’utilisateur   </p>
+                <p><b>5. Verification de la connection de l’utilisateur   </b></p>
                 <div class="code">
                     if(!user.is){ return }
                 </div>
@@ -140,7 +140,7 @@
                 </div>
             </div>
             <div class="texte">
-                <p>6. Récupération d’une valeur de l’utilisateur     </p>
+                <p><b>6. Récupération d’une valeur de l’utilisateur     </b></p>
                 <div class="code">
                     user.get('said');
                 </div>
@@ -149,22 +149,22 @@
                 </div>
             </div>
             <div class="texte">
-                <p>7. Modification d’une valeur de l’utilisateur     </p>
+                <p><b>7. Modification d’une valeur de l’utilisateur     </b></p>
                 <div class="code">
                     user.get('said').set($('#say').val())
                 </div>
                 <div class="texte">
-                    On vient ici modifier la valeur du nœud "said". Et cela est uniquement possible car l'utilisateur est connecté et qu'il modifie ses noeuds.
+                    On vient ici modifier la valeur du nœud "said". Et cela est uniquement possible car l'utilisateur est connecté et qu'il modifie ses nœuds.
                 </div>
             </div>
-            <p>Et voila comment utiliser gun avec des utilisateurs. Seulement ici, nous avons vu comment lire et écrire dans la partie de notre utilisateur.</p>
+            <p>Et voilà comment utiliser gun avec des utilisateurs. Seulement ici, nous avons vu comment lire et écrire dans la partie de notre utilisateur.</p>
             <p>  Pour aller chercher des données d’autres utilisateurs, il faut utiliser leur clé publique: </p>
             <div class="texte">
                 <p>Au lieu d’utiliser :   </p>
                 <div class="code">
                     user = gun.user();
                 </div>
-                <p>On utilse :</p>
+                <p>On utilise :</p>
                 <div class="code">
                     stranger = gun.user(pubKey);
                 </div>
@@ -179,7 +179,7 @@
                 <div class="texte">
                     Cette fonction permet de récupérer le login de la personne.
                 </div>
-                <p>Attention ! Pour pouvoir lire les données d'un autre utilisateur, il faut que celui-ci vous ai donné les "autorisations" car les données sont de base chiffrée. <br>
+                <p>Attention ! Pour pouvoir lire les données d'un autre utilisateur, il faut que celui-ci vous ait donné les "autorisations" car les données sont de base chiffrée. <br>
                     Pour donner le droit de lecture à "stranger", il faut utiliser ceci :</p>
                 <div class="code">
                     user.get(“info”).grant(stranger);
