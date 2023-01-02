@@ -10,13 +10,14 @@ html, body, textarea {
     display: flex;
     flex-direction: row;
     height: 100%;
+    width: 100%;
 }
 
 #navbar {
     background-color: #190A22;
     height: auto;
     margin: 15px;
-    width: 300px;
+    width: 17%;
     border-radius: 25px;
 }
 
@@ -26,7 +27,7 @@ html, body, textarea {
     margin: 15px;
     border-radius: 25px;
     overflow: auto;
-    width: 1605px;
+    width: 83%;
     color: white;
     font-family: Carlito;
     font-size: 25px;
@@ -115,4 +116,9 @@ textarea {
     background-color: white;
     border-radius: 15px;
     padding: 10px;
+}
+
+@font-face {
+    font-family: 'Carlito';
+    src: url('/font/Carlito-Regular.ttf') format('truetype');
 }
