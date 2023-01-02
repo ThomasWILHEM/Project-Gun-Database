@@ -112,8 +112,10 @@
         <div class="texte">
             <p>Technologies utilisée : SEA (Security, Encryption & Autorisation) -> sécurisation et chiffrement des données. </p>
             <p>Gun fonctionne sur le principe d’utilisateurs. Pour pouvoir échanger des données avec des gens, il faut que la personne possède un compte avec un nom d’utilisateur et un mot de passe. </p>
-            <p>Lors de la création du compte d’un utilisateur, une paire de clé privé/publique est créée. Lorsque la personne se connecte, son mot de passe est hash avec la méthode PBKDF2 (Password Based Key Derivation Function number Two) pour service de “proof of work” utilisé pour chiffrer et déchiffrer la clé privée. </p>
-            <p>Cela permet donc de lire et de modifier nos données en utilisant la clé privée en tant que “AES encryption key”. </p>
+            <p>Lors de la création du compte d’un utilisateur, une paire de clé privé/publique est créée. Lorsque la personne créée son compte/se connecte, son mot de passe est mélangé avec du "salt" (séquence de bits) et hash avec la méthode PBKDF2 (Password Based Key Derivation Function number Two).</p>
+            <p style="text-align: center"><img style="width: 40%" src="https://imgs.search.brave.com/1ZLhdMdKh6n35V6G08q6vwERuQtPKEpgsjPO_--Oq14/rs:fit:1000:350:1/g:ce/aHR0cHM6Ly9jZG4u/c3NsdHJ1c3QuY29t/LmF1L2Fzc2V0cy9p/bWFnZXMvYmxvZy9w/YmtkZjIucG5n"></p>
+            <p>Le résultat sert de “proof of work” utilisé pour chiffrer et déchiffrer la clé privée.
+                Cela permet donc de lire et de modifier nos données en utilisant une clé privée sécurisée en tant que “AES encryption key”. </p>
             <p>Pour prouver que la personne envoyant des données est bien nous, on peut ajouter notre signature, utilisée pour vérifier notre identité. </p>
         </div>
         <hr class="rounded">
