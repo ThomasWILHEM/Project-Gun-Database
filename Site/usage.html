@@ -66,6 +66,7 @@
                 <div class="texte">
                     Cette fonction permet de récupérer une instance de Gun et donc un accès au graphe. Il est possible
                     de passer l’adresse de peers en paramètre.
+                    <p>Si jamais rien n'est passé en paramètre, alors le graphe utilisé sera local. Si un ou plusieurs peers sont passés en paramètres, alors l'utilisateur aura accès au graphe du peer (et donc aux autres "morceaux" par extension)</p>
                 </div>
             </div>
             <div class="texte">
@@ -74,7 +75,7 @@
                     copy = gun.get('test').get('paste');
                 </div>
                 <div class="texte">
-                    Cela permet de récupérer la donnée enregistrée dans le nœud “paste” contenu dans le nœud “test”.
+                    La méthode "<b>get</b>" permet de récupérer la donnée enregistrée dans le nœud “paste” contenu dans le nœud “test”.
                     Encore une fois, il peut y avoir différents types de données dans ce nœud.
                 </div>
             </div>
@@ -84,14 +85,14 @@
                     paste.oninput = () => { copy.put("input”.value) };
                 </div>
                 <div class="texte">
-                    La méthode “put” permet de modifier la valeur de la donnée contenue dans le nœud.
+                    La méthode "<b>put</b>" permet de modifier la valeur de la donnée contenue dans le nœud.
                 </div>
             </div>
             <div class="texte">
                 <p><b>4. Mise en place de listener pour modification en temps réelle </b></p>
                 <div class="texte">
                     L’un des avantages de Gun est que l’accès/modification/rafraichissement de la donnée se fait en
-                    temps réel.
+                    temps réel. Cela est possible grâce à la méthode "<b>on</b>" :
                 </div>
                 <div class="code">
                     copy.on((data) => { paste.value = data });
@@ -118,6 +119,7 @@
                 <div class="texte">
                     Cette fonction permet de récupérer une instance de Gun et donc un accès au graphe. Il est possible
                     de passer l’adresse de peers en paramètre.
+                    <p>Si jamais rien n'est passé en paramètre, alors le graphe utilisé sera local. Si un ou plusieurs peers sont passés en paramètres, alors l'utilisateur aura accès au graphe du peer (et donc aux autres "morceaux" par extension)</p>
                 </div>
             </div>
             <div class="texte">
@@ -137,7 +139,7 @@
                     });
                 </div>
                 <div class="texte">
-                    Ici, on vient créer un utilisateur avec la méthode “create” en lui passant en paramètre un nom 	d’utilisateur et un mot de passe. Un couple de clé publique/privé est alors créé et rattaché à l'utilisateur.
+                    Ici, on vient créer un utilisateur avec la méthode “<b>create</b>” en lui passant en paramètre un nom 	d’utilisateur et un mot de passe. Un couple de clé publique/privé est alors créé et rattaché à l'utilisateur.
                     Ici, le mot de passe est utilisé (après mixage avec “some salt”) 	pour chiffrer la clé privée de l’utilisateur (cf <a href="how.html#securite">Partie sécurité</a>)
                     <br>Une fois l’utilisateur créé, il est possible de s’y connecter :
                 </div>
@@ -151,7 +153,7 @@
                     });
                 </div>
                 <div class="texte">
-                    Ici, on utilise la méthode “auth” pour authentifier l’utilisateur en passant le login et le mot de passe.
+                    Ici, on utilise la méthode “<b>auth</b>” pour authentifier l’utilisateur en passant le login et le mot de passe.
                     <br>Attention, les usernames ne sont pas uniques !! L’unicité va se faire via la clé publique de l’utilisateur.
                 </div>
             </div>
@@ -161,7 +163,7 @@
                     if(!user.is){ return }
                 </div>
                 <div class="texte">
-                    La méthode “is” permet de vérifier que l’utilisateur est connecté.
+                    La méthode “<b>is</b>” permet de vérifier que l’utilisateur est connecté.
                 </div>
             </div>
             <div class="texte">
@@ -179,7 +181,7 @@
                     user.get('said').set($('#say').val())
                 </div>
                 <div class="texte">
-                    On vient ici modifier la valeur du nœud "said". Et cela est uniquement possible car l'utilisateur est connecté et qu'il modifie ses nœuds.
+                    On vient ici modifier la valeur du nœud "said" de l'utilisateur. Et cela est uniquement possible car l'utilisateur est connecté et qu'il modifie ses nœuds.
                 </div>
             </div>
             <p>Et voilà comment utiliser gun avec des utilisateurs. Seulement ici, nous avons vu comment lire et écrire dans la partie de notre utilisateur.</p>
@@ -191,7 +193,7 @@
                 </div>
                 <p>On utilise :</p>
                 <div class="code">
-                    stranger = gun.user(pubKey);
+                    stranger = gun.user(publicKey);
                 </div>
             </div>
             <p>Si un utilisateur utilise cela, il aura accès aux informations chiffrés de l’utilisateur. </p>
@@ -211,7 +213,58 @@
                 </div>
                 <p>Ici “user” est l’utilisateur qui accorde les droits et "stranger" est l'autre utilisateur.</p>
             </div>
+            <h3>Autres méthodes et fonctions intéressantes</h3>
+            <div class="texte">
+                <ul>
+                    <li> <b>gun.once</b>
+                        <p>Il existe la méthode "once" permettant de récupérer un élément d'un "get" sans s'inscrire aux updates de la donnée</p>
+                        <div class="code">
+                            gun.get('toto').once(function(result){<br>
+                            &emsp;&emsp;console.log(result); // traitement<br>
+                            }
+                        </div>
+                        <p>
+                            Comme cela, si jamais une personne modifie la donnée contenue sur le nœud pendant qu'on l'utilise, elle ne sera pas modifiée.
+                        </p>
+                    </li>
+                    <li> <b>gun.map</b>
+                        <p>Le map agit comme un ForEach. Il permet d'itérer sur les données d'un noeud tout en s'abonnant aux modifications.</p>
+                        <p>Imaginons un nœud "cars" :</p>
+                        <div class="code">
+                            {<br>
+                            &emsp;&emsp;car1: "Camaro",<br>
+                            &emsp;&emsp;car2: "Bugatti",<br>
+                            &emsp;&emsp;car3: "Fiat Punto"<br>
+                            }
 
+                        </div>
+                        <p>Voila ce que permet le .map :</p>
+                        <div class="code">
+                            gun.get('cars').map().on(function(car, id){<br>
+                            &emsp;&emsp;console.log(car);<br>
+                            });
+                        </div>
+                        <p>
+                            Point intéressant, il permet aussi de détecter les nouvelles entrées (avec un listener) dans le nœud, et donc de traiter celles-ci.
+                            <br>Tout cela grâce au ".on".
+                        </p>
+                    </li>
+                    <li> <b>user.leave</b>
+                        <p>Permet de déconnecté l'utilisateur</p>
+                        <div class="code">
+                            user.leave();
+                        </div>
+                    </li>
+                    <li> <b>user.delete</b>
+                        <p>Permet de supprimer l'utilisateur</p>
+                        <div class="code">
+                            user.delete(alias,password);
+                        </div>
+                        <p>Ici, l'alias est le login (username) de l'utilisateur.</p>
+                    </li>
+                </ul>
+
+            </div>
         </div>
     </div>
 </div>
