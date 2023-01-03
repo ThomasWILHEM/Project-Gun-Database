@@ -127,3 +127,13 @@ hr.rounded {
     border-top: 5px solid #bbb;
     border-radius: 5px;
 }
+
+.legende {
+    color: white;
+    margin-top: 60%;
+    font-size: large;
+    font-family: Carlito;
+    border-radius: 15px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
